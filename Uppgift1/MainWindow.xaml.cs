@@ -57,13 +57,36 @@ namespace Uppgift1
             return 0;
         }
 
+        public double AddZeros(string slutpris)
+        {
+
+            if (slutpris.Length == 7)
+            {
+                return int.Parse(slutpris);
+            }
+            else if (slutpris.Length == 6)
+            {
+                return int.Parse(slutpris) * 10;
+            }
+            else if (slutpris.Length == 5)
+            {
+                return int.Parse(slutpris) * 100;
+            }
+            else if (slutpris.Length == 4)
+            {
+                return int.Parse(slutpris) * 1000; 
+            }
+            return 0;
+        }
+
         private void btn_Click(object sender, RoutedEventArgs e)
         {
             //int slutpris = int.Parse(txtBox.Text);
             //lbl.Content = $"{PrisPerKvadrat(slutpris)} kr/kvm";
             // Uppgift 2
             string slutpris = txtBox.Text;
-            lbl.Content = $"{CheckLength(slutpris)} kr/kvm";
+            txtBox.Text = $"{AddZeros(slutpris):C0}";
+            lbl.Content = $"{CheckLength(slutpris):C0} kr/kvm";
         }
     }
 }
