@@ -34,10 +34,49 @@ namespace Uppgift4
             return sortedRealEstate;
         }
 
+        public int CheckId(List<RealEstate> RealEstates)
+        {
+            int ID = 0;
+            
+            foreach (RealEstate realEstate in RealEstates)
+            {
+                if (realEstate.Id > ID)
+                {
+                    ID = realEstate.Id;
+                }
+            }
+            return (ID + 1);
+        }
+
+        public bool CheckFactor(double area, double rooms)
+        {
+            double factor = area / rooms;
+
+            if (factor < 10 | factor > 50)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public bool AddRealEstate(RealEstate realEstate)
         {
-            RealEstates.Add(realEstate);
-            return true;
+            if (realEstate == null)
+            {
+                return false;
+            }
+            if (CheckFactor(realEstate.Area, realEstate.Rooms) == false)
+            {
+                return false;
+            }
+            else
+            {
+                int freeId = CheckId(RealEstates);
+                realEstate.Id = freeId;
+                RealEstates.Add(realEstate);
+                return true;
+            }
+            
         }
 
     }
